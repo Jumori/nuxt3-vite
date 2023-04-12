@@ -7,7 +7,7 @@
         <slot />
       </main>
 
-      <Footer />
+      <CustomFooter />
     </div>
   </v-app>
 </template>

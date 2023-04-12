@@ -12,7 +12,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, defineProps, withDefaults, onMounted, computed } from 'vue'
+import { ref, withDefaults, onMounted, computed } from 'vue'
 
 import { HeadingProps } from './types'
 
@@ -34,4 +34,10 @@ const classObject = computed(() => ({
 onMounted(() => {
   componentTag.value = props.asChild ? '' : 'h2'
 })
+</script>
+
+<script lang="ts">
+export default {
+  name: 'Heading'
+}
 </script>

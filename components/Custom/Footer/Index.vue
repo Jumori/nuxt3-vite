@@ -9,3 +9,9 @@ import { ref } from 'vue'
 
 const currentYear = ref(new Date().getFullYear())
 </script>
+
+<script lang="ts">
+export default {
+  name: 'CustomFooter'
+}
+</script>

@@ -1,10 +1,12 @@
+import { MaskOptions } from 'maska'
+
 export interface InputProps {
   name: string
   value: string | number | null
   label: string
 
   floatingLabel?: boolean
-  mask?: string
+  mask?: MaskOptions | string
   type?: string
   inputmode?: string
   disabled?: boolean

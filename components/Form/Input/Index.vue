@@ -17,15 +17,15 @@
       :inputmode="props.inputmode"
       :prepend-inner-icon="hasPrependIcon ? props.prependIcon : null"
       :disabled="props.disabled"
+      v-maska:[maskaMask]
       variant="solo"
       @input="handleInput"
-    >
-    </v-text-field>
+    />
   </div>
 </template>
 
 <script lang="ts" setup>
-import { defineEmits } from 'vue'
+import { getMask, getMaskOptions, getUnmaskedValue } from '~/services/maska'
 import { InputProps, InputEvent } from './types'
 
 const props = withDefaults(defineProps<InputProps>(), {
@@ -39,12 +39,48 @@ const props = withDefaults(defineProps<InputProps>(), {
 const emits = defineEmits(['input'])
 
 const hasLabel = computed(() => props.label !== '')
+
 const hasPrependIcon = computed(
   () => props.prependIcon && props.prependIcon !== ''
 )
 
+const maskaMask = computed(() => {
+  if (!props.mask) {
+    return null
+  }
+
+  if (typeof props.mask === 'string') {
+    return getMask(props.mask)
+  }
+
+  return props.mask
+})
+
+const maskaMaskOptions = computed(() => {
+  if (!props.mask) {
+    return null
+  }
+
+  if (typeof props.mask === 'string') {
+    return getMaskOptions(props.mask)
+  }
+
+  return null
+})
+
 const handleInput = (event: InputEvent) => {
+  if (props.mask && maskaMaskOptions.value?.autounmask) {
+    const unmaskedValue = getUnmaskedValue(event.target.value, props.mask)
+    console.log(unmaskedValue)
+  }
+
   emits('input', event.target.value)
+}
+</script>
+
+<script lang="ts">
+export default {
+  name: 'FormInput'
 }
 </script>
 

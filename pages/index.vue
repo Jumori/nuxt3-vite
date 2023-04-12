@@ -15,21 +15,16 @@
       @submit.prevent="handleSubmit"
     >
       <FormInput
-        name="email"
-        label="Endereço de e-mail"
-        :value="formData.email"
-        prependIcon="mdi-email-outline"
-        inputmode="email"
-        type="email"
-        @input="value => (formData.email = value)"
-      />
-      <FormInput
-        name="password"
-        label="Sua senha"
-        :value="formData.password"
-        prependIcon="mdi-lock-outline"
-        type="password"
-        @input="value => (formData.password = value)"
+        v-for="(field, fieldIndex) in formFields"
+        :key="field.name"
+        :name="field.name"
+        :label="field.label"
+        :value="formFields[fieldIndex].value"
+        :prependIcon="field.prependIcon || undefined"
+        :inputmode="field.inputmode || 'text'"
+        :type="field.type || 'text'"
+        :mask="field.mask"
+        @input="value => (formFields[fieldIndex].value = value)"
       />
 
       <v-btn type="submit" class="mt-4">Entrar na plataforma</v-btn>
@@ -38,15 +33,30 @@
 </template>
 
 <script lang="ts" setup>
+import { InputProps } from '~/components/Form/Input/types'
+
 definePageMeta({
   layout: 'default'
 })
 
 const isLoggedIn = ref(false)
-const formData = reactive({
-  email: null,
-  password: null
-})
+const formFields = ref<InputProps[]>([
+  {
+    name: 'email',
+    label: 'Endereço de e-mail',
+    value: '',
+    prependIcon: 'mdi-email-outline',
+    inputmode: 'email',
+    type: 'email'
+  },
+  {
+    name: 'password',
+    label: 'Sua senha',
+    value: '',
+    prependIcon: 'mdi-lock-outline',
+    type: 'password'
+  }
+])
 
 const handleSubmit = () => {
   console.log('submit')

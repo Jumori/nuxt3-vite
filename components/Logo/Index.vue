@@ -15,11 +15,17 @@
 </template>
 
 <script lang="ts" setup>
-import { withDefaults, defineProps } from 'vue'
+import { withDefaults } from 'vue'
 
 import { LogoProps } from './types'
 
 const props = withDefaults(defineProps<LogoProps>(), {
   color: '#00DC82' // FIXME get from postcss theme
 })
+</script>
+
+<script lang="ts">
+export default {
+  name: 'Logo'
+}
 </script>
