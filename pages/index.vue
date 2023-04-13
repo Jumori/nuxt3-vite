@@ -27,7 +27,9 @@
         @input="value => (formFields[fieldIndex].value = value)"
       />
 
-      <v-btn type="submit" class="mt-4">Entrar na plataforma</v-btn>
+      <CustomButton type="button" class="mt-4">
+        Entrar na plataforma
+      </CustomButton>
     </v-form>
   </div>
 </template>

@@ -4,8 +4,9 @@
       v-if="!props.floatingLabel && hasLabel"
       :for="props.name"
       class="text-secondary-100 font-semibold"
-      >{{ label }}</label
     >
+      {{ label }}
+    </label>
 
     <v-text-field
       :id="props.name"

@@ -17,7 +17,19 @@ export interface DictionaryItemOptions {
 export const dictionary: DictionaryItem = {
   phone: {
     mask: ['(##) ####-####', '(##) #####-####'],
-    eager: true
+    eager: false
+  },
+  cpf: {
+    mask: '###.###.###-##',
+    eager: false
+  },
+  zipcode: {
+    mask: '#####-###',
+    eager: false
+  },
+  date: {
+    mask: '##/##/####',
+    eager: false
   }
 }
 
