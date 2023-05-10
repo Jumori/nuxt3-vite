@@ -19,6 +19,7 @@
       :prepend-inner-icon="hasPrependIcon ? props.prependIcon : null"
       :disabled="props.disabled"
       v-maska:[maskaMask]
+      v-inputmask="inputmaskMask"
       variant="solo"
       @input="handleInput"
     />
@@ -26,7 +27,12 @@
 </template>
 
 <script lang="ts" setup>
-import { getMask, getMaskOptions, getUnmaskedValue } from '~/services/maska'
+import {
+  getMaskaMask,
+  getMaskaMaskOptions,
+  getMaskaUnmaskedValue
+} from '~/services/maska'
+import { getInputmaskMask } from '~/services/inputmask'
 import { InputProps, InputEvent } from './types'
 
 const props = withDefaults(defineProps<InputProps>(), {
@@ -46,32 +52,44 @@ const hasPrependIcon = computed(
 )
 
 const maskaMask = computed(() => {
-  if (!props.mask) {
+  if (!props.maska) {
     return null
   }
 
-  if (typeof props.mask === 'string') {
-    return getMask(props.mask)
+  if (typeof props.maska === 'string') {
+    return getMaskaMask(props.maska)
   }
 
-  return props.mask
+  return props.maska
 })
 
 const maskaMaskOptions = computed(() => {
-  if (!props.mask) {
+  if (!props.maska) {
     return null
   }
 
-  if (typeof props.mask === 'string') {
-    return getMaskOptions(props.mask)
+  if (typeof props.maska === 'string') {
+    return getMaskaMaskOptions(props.maska)
   }
 
   return null
 })
 
+const inputmaskMask = computed(() => {
+  if (!props.inputmask) {
+    return null
+  }
+
+  if (typeof props.inputmask === 'string') {
+    return getInputmaskMask(props.inputmask)
+  }
+
+  return props.maska
+})
+
 const handleInput = (event: InputEvent) => {
-  if (props.mask && maskaMaskOptions.value?.autounmask) {
-    const unmaskedValue = getUnmaskedValue(event.target.value, props.mask)
+  if (props.maska && maskaMaskOptions.value?.autounmask) {
+    const unmaskedValue = getMaskaUnmaskedValue(event.target.value, props.maska)
     console.log(unmaskedValue)
   }
 

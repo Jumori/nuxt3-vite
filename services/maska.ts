@@ -1,10 +1,10 @@
 import { MaskOptions, MaskInputOptions, tokens } from 'maska'
 
-export interface DictionaryItem {
+export interface MaskaDictionaryItem {
   [key: string]: MaskInputOptions
 }
 
-export interface DictionaryItemOptions {
+export interface MaskaDictionaryItemOptions {
   [key: string]: {
     autounmask?: boolean
   }
@@ -14,7 +14,7 @@ export interface DictionaryItemOptions {
  * To make it work with Vuetify 3.x you should use options argument because they don't pass data- props to native input
  * https://github.com/beholdr/maska/issues/97#issuecomment-1340614430
  */
-export const dictionary: DictionaryItem = {
+export const maskaDictionary: MaskaDictionaryItem = {
   phone: {
     mask: ['(##) ####-####', '(##) #####-####'],
     eager: false
@@ -33,22 +33,22 @@ export const dictionary: DictionaryItem = {
   }
 }
 
-export const dictionaryOptions: DictionaryItemOptions = {
+export const maskaDictionaryOptions: MaskaDictionaryItemOptions = {
   phone: {
     autounmask: true
   }
 }
 
-export const getMask = (mask: string, dict: DictionaryItem = dictionary) => {
+export const getMaskaMask = (mask: string, dict: MaskaDictionaryItem = maskaDictionary) => {
   type ObjectKey = keyof typeof dict
   const maskKey = mask as ObjectKey
 
   return mask in dict ? dict[maskKey] : null
 }
 
-export const getMaskOptions = (
+export const getMaskaMaskOptions = (
   mask: string,
-  dictOptions: DictionaryItemOptions = dictionaryOptions
+  dictOptions: MaskaDictionaryItemOptions = maskaDictionaryOptions
 ) => {
   type ObjectKey = keyof typeof dictOptions
   const maskKey = mask as ObjectKey
@@ -56,11 +56,11 @@ export const getMaskOptions = (
   return mask in dictOptions ? dictOptions[maskKey] : null
 }
 
-export const getUnmaskedValue = (value: string, mask: string | MaskOptions) => {
+export const getMaskaUnmaskedValue = (value: string, mask: string | MaskOptions) => {
   let maskset = null
 
   if (typeof mask === 'string') {
-    const maskItem = getMask(mask)
+    const maskItem = getMaskaMask(mask)
 
     if (!maskItem || !maskItem.mask) {
       return value

@@ -1,4 +1,5 @@
 import { MaskOptions } from 'maska'
+import Inputmask from 'inputmask'
 
 export interface InputProps {
   name: string
@@ -6,11 +7,13 @@ export interface InputProps {
   label: string
 
   floatingLabel?: boolean
-  mask?: MaskOptions | string
   type?: string
   inputmode?: string
   disabled?: boolean
   placeholder?: string
+
+  maska?: MaskOptions | string
+  inputmask?: Inputmask.Options | string
 
   prependIcon?: string
 }

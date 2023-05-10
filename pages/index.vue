@@ -23,7 +23,8 @@
         :prependIcon="field.prependIcon || undefined"
         :inputmode="field.inputmode || 'text'"
         :type="field.type || 'text'"
-        :mask="field.mask"
+        :maska="field.maska"
+        :inputmask="field.inputmask"
         @input="value => (formFields[fieldIndex].value = value)"
       />
 

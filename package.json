@@ -36,6 +36,8 @@
     "@mdi/font": "^7.2.96",
     "@nuxt/kit": "^3.3.3",
     "@pinia/nuxt": "^0.4.8",
+    "@types/inputmask": "^5.0.3",
+    "inputmask": "^5.0.8",
     "maska": "^2.1.8",
     "pinia": "^2.0.34",
     "sass": "^1.61.0",
